@@ -12,33 +12,48 @@ const AddDoctor = () => {
     sex: '',
     address: '',
     pincode: '',
-    Occupation: '',
     description: '',
+    profile_photo: null,  // Initialize profile_photo as null for file upload handling
   });
 
   const navigate = useNavigate();
 
   const handleChange = (e) => {
-    setDoctor({ ...doctor, [e.target.name]: e.target.value });
+    if (e.target.name === 'profile_photo') {
+      setDoctor({ ...doctor, profile_photo: e.target.files[0] }); // Capture the file object
+    } else {
+      setDoctor({ ...doctor, [e.target.name]: e.target.value });
+    }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const doctorData = {
-      ...doctor,
-      username: doctor.name + doctor.mobile_num[8] + doctor.mobile_num[9], 
-      password: '123456', 
-    };
 
-    console.log(doctorData);
-    axios.post('http://127.0.0.1:8000/Add_Doc', doctorData)
-      .then((response) => {
-        console.log('Doctor added successfully:', response.data);
-        navigate('/Home');
-      })
-      .catch((error) => {
-        console.error('There was an error adding the doctor:', error);
+    // Create FormData object to send file data
+    const formData = new FormData();
+    formData.append('name', doctor.name);
+    formData.append('mobile_num', doctor.mobile_num);
+    formData.append('about', doctor.about);
+    formData.append('email', doctor.email);
+    formData.append('dob', doctor.dob);
+    formData.append('sex', doctor.sex);
+    formData.append('address', doctor.address);
+    formData.append('pincode', doctor.pincode);
+    formData.append('description', doctor.description);
+    formData.append('profile_photo', doctor.profile_photo); // Append the file object
+
+    try {
+      const response = await axios.post('http://127.0.0.1:8000/users/add-doc/', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data', // Important to set this header for file uploads
+        },
       });
+
+      console.log('Doctor added successfully:', response.data);
+      navigate('/Home');
+    } catch (error) {
+      console.error('There was an error adding the doctor:', error);
+    }
   };
 
   return (
@@ -93,6 +108,15 @@ const AddDoctor = () => {
           />
         </div>
         <div>
+          <label>Profile Photo:</label>
+          <input
+            type="file"
+            name="profile_photo"
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div>
           <label>Sex:</label>
           <select
             name="sex"
@@ -125,8 +149,6 @@ const AddDoctor = () => {
           />
         </div>
         <div>
-        </div>
-        <div>
           <label>Description:</label>
           <textarea
             name="description"
@@ -140,4 +162,4 @@ const AddDoctor = () => {
   );
 };
 
-export default AddDoctor;
+export default AddDoctor;

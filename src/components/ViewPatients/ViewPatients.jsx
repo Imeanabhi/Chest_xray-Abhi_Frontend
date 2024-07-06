@@ -12,7 +12,7 @@ const ViewPatients = () => {
     }, []);
   
     const fetchPatients = () => {
-      axios.get('http://127.0.0.1:8000/Patient_View')
+      axios.get('http://127.0.0.1:8000/users/patient-view/')
         .then(response => {
           if (response.data.success && Array.isArray(response.data.patients)) {
             setPatients(response.data.patients);
@@ -25,7 +25,7 @@ const ViewPatients = () => {
   
     const handleDelete = (id) => {
       if (window.confirm("Are you sure you want to delete the Patient?")) {
-        axios.delete(`http://127.0.0.1:8000/Patient_Doc/${id}`)
+        axios.delete(`http://127.0.0.1:8000/users/delete-pat/${id}`)
           .then(() => fetchPatients())
           .catch(error => console.error('Error deleting Patient:', error));
       }

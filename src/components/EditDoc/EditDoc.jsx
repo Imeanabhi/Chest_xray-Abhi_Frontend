@@ -8,7 +8,7 @@ const EditDoc = () => {
   const navigate = useNavigate();
 
   const fetchDoctorDetails = useCallback(() => {
-    axios.get(`http://127.0.0.1:8000/Get_Doc/${userId}`)
+    axios.get(`http://127.0.0.1:8000/users/get-doc/${userId}`)
       .then(response => {
         if (response.data.success) {
           setDoctor(response.data.doctor);
@@ -29,7 +29,7 @@ const EditDoc = () => {
   };
 
   const handleSave = () => {
-    axios.put(`http://127.0.0.1:8000/Update_Doc/${userId}`, doctor)
+    axios.put(`http://127.0.0.1:8000/users/update-doc/${userId}`, doctor)
       .then(() => {
         navigate('/Home/ViewD');
       })
@@ -108,6 +108,21 @@ const EditDoc = () => {
         </select>
       </label>
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>
+<br/>
+      <div>
+          <label>Profile Photo:</label>
+          <input
+          type="file"
+            name="profile_photo"
+            value={doctor.profile_photo||""}
+            onChange={handleInputChange}
+            placeholder='Profile Photo'
+          />
+        </div>
+<br/>
+
+
       <label>
         Address: <br/>
         <input

@@ -17,7 +17,7 @@ const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-const response =await axios.post('http://127.0.0.1:8000/Staff_Login',
+const response =await axios.post('http://127.0.0.1:8000/auth/staff-login/',
 {
     UserName: username,
     UserPassword: password,
@@ -65,7 +65,7 @@ const data = response.data;
             />
             <br/>
 
-            <label htmlFor='password'>Password :</label>
+            <label htmlFor = 'password'>Password :</label>
             <input
               type='password'
               id='password'

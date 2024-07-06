@@ -11,40 +11,58 @@ const AddPatient = () => {
     sex: '',
     address: '',
     pincode: '',
-    Occupation: '',
     medication:'',
     weight:'',
     height:'',
+    profile_photo: null  // Change to null for file upload handling
   });
 
   const navigate = useNavigate();
 
   const handleChange = (e) => {
-    setPatient({ ...patient, [e.target.name]: e.target.value });
+    if (e.target.name === 'profile_photo') {
+      setPatient({ ...patient, profile_photo: e.target.files[0] }); // Capture the file object
+    } else {
+      setPatient({ ...patient, [e.target.name]: e.target.value });
+    }
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const patientData = {
-      ...patient,
-      username: patient.name + patient.mobile_num[8] + patient.mobile_num[9], 
-      password: '123456', 
-    };
+  const handleSubmit = async (e) => {
 
-    console.log(patientData);
-    axios.post('http://127.0.0.1:8000/Add_Pat', patientData)
-      .then((response) => {
-        console.log('Patient added successfully:', response.data);
-        navigate('/Home');
-      })
-      .catch((error) => {
-        console.error('There was an error adding the patient:', error);
+    e.preventDefault();
+    console.log('Profile Photo:', patient.profile_photo);
+    // Create FormData object to send file data
+    const formData = new FormData();
+    formData.append('name', patient.name);
+    formData.append('mobile_num', patient.mobile_num);
+    formData.append('email', patient.email);
+    formData.append('dob', patient.dob);
+    formData.append('sex', patient.sex);
+    formData.append('address', patient.address);
+    formData.append('pincode', patient.pincode);
+    formData.append('medication', patient.medication);
+    formData.append('weight', patient.weight);
+    formData.append('height', patient.height);
+    formData.append('profile_photo', patient.profile_photo); // Append the file object
+console.log(patient.profile_photo)
+    try {
+      const response = await axios.post('http://127.0.0.1:8000/users/add-pat/', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data', // Important to set this header for file uploads
+        },
       });
+
+      console.log('Patient added successfully:', response.data);
+      navigate('/Home');
+    } catch (error) {
+      console.error('There was an error adding the patient:', error);
+    }
   };
 
   return (
     <div>
       <form onSubmit={handleSubmit}>
+        {/* Your form inputs here */}
         <div>
           <label>Name:</label>
           <input
@@ -85,6 +103,17 @@ const AddPatient = () => {
             required
           />
         </div>
+
+        <div>
+          <label>Profile Photo:</label>
+          <input
+            type="file"
+            name="profile_photo"
+            onChange={handleChange} // Capture file changes
+            required
+          />
+        </div>
+
         <div>
           <label>Sex:</label>
           <select
@@ -99,6 +128,7 @@ const AddPatient = () => {
             <option value="O">Other</option>
           </select>
         </div>
+
         <div>
           <label>Address:</label>
           <textarea
@@ -107,6 +137,7 @@ const AddPatient = () => {
             onChange={handleChange}
           />
         </div>
+
         <div>
           <label>Pincode:</label>
           <input
@@ -117,8 +148,7 @@ const AddPatient = () => {
             required
           />
         </div>
-        <div>
-        </div>
+
         <div>
           <label>Medication:</label>
           <textarea
@@ -127,8 +157,6 @@ const AddPatient = () => {
             onChange={handleChange}
           />
         </div>
-
-
 
         <div>
           <label>Weight:</label>
@@ -140,17 +168,15 @@ const AddPatient = () => {
           />
         </div>
 
-        
         <div>
-          <label>height:</label>
+          <label>Height:</label>
           <input
-          type="number"
+            type="number"
             name="height"
             value={patient.height}
             onChange={handleChange}
           />
         </div>
-
 
         <button type="submit">Add Patient</button>
       </form>
