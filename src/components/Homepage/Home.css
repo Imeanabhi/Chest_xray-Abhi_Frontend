@@ -20,6 +20,9 @@
     text-align: left;  /* Align text to the left */
 }
 
+.welcome{
+    margin-left:125px;
+}
 
 .dropdown-content NavDropdown.Item:hover {
     background-color: #f1f1f1;  /* Darken background color on hover */

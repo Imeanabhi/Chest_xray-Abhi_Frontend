@@ -1,87 +1,115 @@
-.adduser{
-     
-    width:40%;
-    background-color: aqua;
-    padding:30px;
-    margin:50px auto;
-    border-top-right-radius:40px;
-    border-bottom-left-radius:25px;
-    border-top-left-radius:25px;
-    border-bottom-right-radius:40px;
-    border-left-style:groove;
-    border-width:125px;
-    border-color: rgb(255, 85, 0);
-    box-shadow:10px 20px 30px rgb(0, 34, 255);
-}
-.Login h1{
-    color:rgb(206, 125, 13);
-    size:small  ;
-    background-color:purple ;
-    display: center;
-    font-display: center;
-}
-.Login .adduser h1{
-    color:blue;
+/* Navbar styling */
+.navbar {
+    background-color: #343a40;
+    padding: 1rem 2rem;
+  }
+  
+  .navbar-brand {
+   
+    font-size: 1.5rem;
+    font-weight: bold;
+    color:white;
+    display:center;
+  }
+  
+  .navbar-nav .nav-link {
+    color: #ccc !important;
+    margin-left: 1rem;
+  }
+  
+  .navbar-nav .nav-link:hover {
+    color: #fff !important;
+  }
+  
+  /* Form container styling */
+  .adduser {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     text-align: center;
+  }
+  
+  .adduser h2 {
+    margin-bottom: 20px;
+    color: #343a40;
+  }
+  
+  .adduserform {
     display: flex;
-
-}
-.adduserform .input-group{
-    display: flex;
-    width:90%;
-    flex-direction:column;
-}
-.adduserform .input-group label{
-    margin-top:2px;
-    margin-bottom:5px;
-}
-
-.input-group button{
-    margin-top: 20px;   
-    background:rgba(7, 240, 15, 0.96);
-    border-radius: 10px;
-    padding:7px;
-    transition: padding .3s;
-    size:10px;
-    margin-bottom: 10px;
-}
-.input-group button:hover{
-    padding: 12px;
-    background:brown;
-}
-.container{
-    width:100%;
-}
-
-
-
-
-.bg{
-    background-color: rgb(20, 230, 249);
-    overflow: hidden;
-}
-.bg container{
-    background-color: rgb(17, 16, 16);
-    list-style-type: none;  /* Remove bullet points from the list */
-    padding: 0;
-    margin: 0;
-    display: flex;  /* Display items horizontally */
-}
-
-.bg Nav.Link {
-    float:right;  /* Float list items to the left */
-}
-
-.bg Nav.Link a {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .input-group {
+    width: 100%;
+    margin-bottom: 15px;
+  }
+  
+  .input-group label {
     display: block;
-    color: white;  /* Text color */
-    text-align: center;
-    padding: 14px 16px;  /* Padding inside the navbar links */
-    text-decoration: none;  /* Remove underline from links */
-    
-}
-
-
-.bg Nav.Link a:hover {
-    background-color: #111;  /* Darken background color on hover */
-}
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #343a40;
+  }
+  
+  .input-group input {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 14px;
+  }
+  
+  button {
+    width: 100%;
+    padding: 10px 0;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  .error-message {
+    color: red;
+    margin-top: 15px;
+    font-size: 14px;
+  }
+  
+  /* Responsive design */
+  @media (max-width: 600px) {
+    .navbar {
+      padding: 0.5rem 1rem;
+    }
+  
+    .adduser {
+      margin: 20px auto;
+      padding: 15px;
+    }
+  
+    .adduser h2 {
+      font-size: 1.5rem;
+    }
+  
+    .input-group input {
+      padding: 8px;
+      font-size: 14px;
+    }
+  
+    button {
+      padding: 8px 0;
+      font-size: 14px;
+    }
+  }
+  

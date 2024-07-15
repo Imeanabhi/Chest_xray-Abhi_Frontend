@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import './AddPatients.css';
 
 const AddPatient = () => {
   const [patient, setPatient] = useState({
@@ -46,7 +47,7 @@ const AddPatient = () => {
     formData.append('profile_photo', patient.profile_photo); // Append the file object
 console.log(patient.profile_photo)
     try {
-      const response = await axios.post('http://127.0.0.1:8000/users/add-pat/', formData, {
+      const response = await axios.post('http://51.20.3.117/users/add-pat/', formData, {
         headers: {
           'Content-Type': 'multipart/form-data', // Important to set this header for file uploads
         },

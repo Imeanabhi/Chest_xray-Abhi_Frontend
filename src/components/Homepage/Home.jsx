@@ -23,7 +23,7 @@ const AddPatientClick=()=>{
     <div>
 <Navbar expand="lg" className="bg" text='center'>
     <Container>
-      <Navbar.Brand href="">WELCOME</Navbar.Brand>
+      <Navbar.Brand  className="welcome" href="">WELCOME</Navbar.Brand>
     </Container>
   </Navbar>
   <br/>

@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import './EditDoc.css';
 
 const EditDoc = () => {
   const { userId } = useParams();
@@ -8,7 +9,7 @@ const EditDoc = () => {
   const navigate = useNavigate();
 
   const fetchDoctorDetails = useCallback(() => {
-    axios.get(`http://127.0.0.1:8000/users/get-doc/${userId}`)
+    axios.get(`http://51.20.3.117/users/get-doc/${userId}`)
       .then(response => {
         if (response.data.success) {
           setDoctor(response.data.doctor);
@@ -29,7 +30,7 @@ const EditDoc = () => {
   };
 
   const handleSave = () => {
-    axios.put(`http://127.0.0.1:8000/users/update-doc/${userId}`, doctor)
+    axios.put(`http://51.20.3.117/users/update-doc/${userId}`, doctor)
       .then(() => {
         navigate('/Home/ViewD');
       })
@@ -38,7 +39,7 @@ const EditDoc = () => {
 
   return (
     <div>
-      <h3>Edit Doctor</h3>
+      <h3 className="i">Edit Doctor</h3>
       <label>
         Name : <br/>
       <input
@@ -169,8 +170,8 @@ const EditDoc = () => {
       </label>
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       <br/> <br/> <br/> <br/>
-      <button onClick={handleSave}>Save</button>
-      <button onClick={() => navigate('/Home/ViewD')}>Cancel</button>
+      <button className="buttons" onClick={handleSave}>Save</button>
+      <button className="buttons" onClick={() => navigate('/Home/ViewD')}>Cancel</button>
     </div>
   );
 };

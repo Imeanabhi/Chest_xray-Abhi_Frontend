@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import './ViewDoctors.css';
 
 const ViewDoctors = () => {
   const [doctors, setDoctors] = useState([]);
@@ -11,7 +12,7 @@ const ViewDoctors = () => {
   }, []);
 
   const fetchDoctors = () => {
-    axios.get('http://127.0.0.1:8000/users/doctor-view/')
+    axios.get('http://51.20.3.117/users/doctor-view/')
       .then(response => {
         if (response.data.success && Array.isArray(response.data.doctors)) {
           setDoctors(response.data.doctors);
@@ -24,7 +25,7 @@ const ViewDoctors = () => {
 
   const handleDelete = (id) => {
     if (window.confirm("Are you sure you want to delete the doctor's license?")) {
-      axios.delete(`http://127.0.0.1:8000/users/delete-doc/${id}`)
+      axios.delete(`http://51.20.3.117/users/delete-doc/${id}`)
         .then(() => fetchDoctors())
         .catch(error => console.error('Error deleting doctor:', error));
     }

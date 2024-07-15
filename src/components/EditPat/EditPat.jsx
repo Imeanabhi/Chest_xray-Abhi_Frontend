@@ -8,7 +8,7 @@ const EditPat = () => {
   const navigate = useNavigate();
 
   const fetchPatientDetails = useCallback(() => {
-    axios.get(`http://127.0.0.1:8000/users/get-pat/${userId}`)
+    axios.get(`http://51.20.3.117/users/get-pat/${userId}`)
       .then(response => {
         if (response.data.success) {
           setPatient(response.data.patient);
@@ -29,7 +29,7 @@ const EditPat = () => {
   };
 
   const handleSave = () => {
-    axios.put(`http://127.0.0.1:8000/users/update-pat/${userId}`, patient)
+    axios.put(`http://51.20.3.117/users/update-pat/${userId}`, patient)
       .then(() => {
         navigate('/Home/ViewP');
       })
@@ -141,7 +141,7 @@ const EditPat = () => {
       <input
         type="file"
         name="profile_photo"
-        value={patient.profile_photo || ''}
+        
         onChange={handleInputChange}
         placeholder="Profile Photo"
       />
